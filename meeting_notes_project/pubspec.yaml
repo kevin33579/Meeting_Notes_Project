@@ -38,7 +38,11 @@ dependencies:
   cloud_firestore: ^1.0.4
   intl: ^0.17.0
   flutter_spinkit: ^5.0.0
-  firebase_messaging: ^9.1.2
+  firebase_messaging: ^9.1.4
+  clipboard: ^0.1.2+8
+  speech_to_text: ^4.0.0
+  avatar_glow: ^1.2.0
+  url_launcher: ^6.0.0-nullsafety
 
 dev_dependencies:
   flutter_test:
