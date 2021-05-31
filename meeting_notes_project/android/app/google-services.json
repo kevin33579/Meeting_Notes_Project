@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "159346412198",
+    "project_id": "meeting-notes-project-bbe4d",
+    "storage_bucket": "meeting-notes-project-bbe4d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:159346412198:android:4768b73ce8083033b88267",
+        "android_client_info": {
+          "package_name": "com.example.meeting_notes_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "159346412198-9s8r2bgjd6nkenkdvfbiss70jgr0d4se.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAG-Qi0bQuz49UyRX9LRcpS02DZGQjPMvU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "159346412198-9s8r2bgjd6nkenkdvfbiss70jgr0d4se.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
