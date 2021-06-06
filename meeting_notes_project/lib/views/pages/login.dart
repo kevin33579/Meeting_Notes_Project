@@ -2,12 +2,12 @@ part of 'pages.dart';
 
 class Login extends StatefulWidget {
   static const String routeName = "/login";
+
   @override
   _LoginState createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
-
   final _formKey = GlobalKey<FormState>();
   final ctrlEmail = TextEditingController();
   final ctrlPassword = TextEditingController();
@@ -32,11 +32,12 @@ class _LoginState extends State<Login> {
             ListView(
               children: [
                 Form(
-                  key: _formKey,
+                    key: _formKey,
                     child: Column(
                       children: [
                         SizedBox(height: 24),
-                        Image.asset("name"),
+                        Image.asset("assets/images/logo.png",
+                        height: 200,),
                         SizedBox(height: 40),
                         TextFormField(
                           controller: ctrlEmail,
@@ -47,16 +48,15 @@ class _LoginState extends State<Login> {
                             border: OutlineInputBorder(),
                           ),
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value){
-                            if(value.isEmpty){
+                          validator: (value) {
+                            if (value.isEmpty) {
                               return "Please enter your email!";
-                            }else{
-                              if(EmailValidator.validate(value)){
+                            } else {
+                              if (!EmailValidator.validate(value)) {
                                 return "Email not valid!";
-                              }else{
+                              } else {
                                 return null;
                               }
-                              return null;
                             }
                           },
                         ),
@@ -71,79 +71,82 @@ class _LoginState extends State<Login> {
                             prefixIcon: Icon(Icons.vpn_key),
                             border: OutlineInputBorder(),
                             suffixIcon: new GestureDetector(
-                              onTap: (){
+                              onTap: () {
                                 setState(() {
                                   isVisible = !isVisible;
                                 });
                               },
-                              child: Icon(
-                                  isVisible ?
-                                  Icons.visibility :
-                                  Icons.visibility_off
-                              ),
+                              child: Icon(isVisible
+                                  ? Icons.visibility
+                                  : Icons.visibility_off),
                             ),
                           ),
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value){
-                            return value.length<6?
-                                "password must have at least 6 characters!":
-                                null;
+                          validator: (value) {
+                            return value.length < 6
+                                ? "password must have at least 6 characters!"
+                                : null;
                           },
                         ),
                         SizedBox(height: 24),
                         ElevatedButton.icon(
-                            onPressed: ()async{
-                              if(_formKey.currentState.validate()){
-                                setState(() {
-                                  isLoading = true;
-                                });
-                                await AuthServices.SignIn(ctrlEmail.text,ctrlPassword.text).then((value){
-                                  if (value=="success"){
-                                    setState(() {
-                                      isLoading = false;
-                                    });
-                                    ActivityServices.showToast("Register success", Colors.green);
-                                    Navigator.pushReplacementNamed(context, Login.routeName);
-                                  }else{
-                                    setState(() {
-                                      isLoading = false;
-                                    });
-                                    ActivityServices.showToast(value, Colors.red);
-                                  }
-                                });
+                          onPressed: () async {
+                            if (_formKey.currentState.validate()) {
+                              setState(() {
+                                isLoading = true;
+                              });
+                              await AuthServices.SignIn(
+                                      ctrlEmail.text, ctrlPassword.text)
+                                  .then((value) {
+                                if (value == "success") {
+                                  setState(() {
+                                    isLoading = false;
+                                  });
+                                  ActivityServices.showToast(
+                                      "Login success", Colors.green);
+                                  Navigator.pushReplacementNamed(
+                                      context, MainMenu.routeName);
+                                } else {
+                                  setState(() {
+                                    isLoading = false;
+                                  });
+                                  ActivityServices.showToast(value, Colors.red);
+                                }
+                              });
 
-                                //Navigator.pushReplacementNamed(context, MainMenu.routeName);
-                              }else{
-                                Fluttertoast.showToast(msg: "Please check the fields",);
-                              }
-                            },
-                            icon: Icon(Icons.login_rounded),
-                            label: Text("Login"),
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.cyan,
-                              elevation: 0,
-                            ),
+                              //Navigator.pushReplacementNamed(context, MainMenu.routeName);
+                            } else {
+                              Fluttertoast.showToast(
+                                msg: "Please check the fields",
+                              );
+                            }
+                          },
+                          icon: Icon(Icons.login_rounded),
+                          label: Text("Login"),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.cyan,
+                            elevation: 0,
+                          ),
                         ),
                         SizedBox(height: 24),
                         GestureDetector(
-                          onTap: (){
-                            Navigator.pushReplacementNamed(context, Register.routeName);
+                          onTap: () {
+                            Navigator.pushReplacementNamed(
+                                context, Register.routeName);
                           },
-                          child: Text("Not registered yet? Join now!",
+                          child: Text(
+                            "Not registered yet? Join now!",
                             style: TextStyle(
                               color: Colors.cyan,
                               fontSize: 16,
                             ),
-
                           ),
                         ),
                       ],
-                ))
+                    ))
               ],
             ),
-            isLoading == true
-              ?ActivityServices.loadings()
-                :Container()
+            isLoading == true ? ActivityServices.loadings() : Container()
           ],
         ),
       ),

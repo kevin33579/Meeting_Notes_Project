@@ -49,6 +49,7 @@ class _MyAccountState extends State<MyAccount> {
               ),
             ),
           ),
+          isloading == true ? ActivityServices.loadings() : Container()
         ]));
   }
 }

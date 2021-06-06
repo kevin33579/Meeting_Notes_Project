@@ -46,7 +46,7 @@ class _RegisterState extends State<Register> {
                               keyboardType: TextInputType.name,
                               decoration: InputDecoration(
                                 labelText: "Name",
-                                prefixIcon: Icon(Icons.supervised_user_circle_outlined),
+                                prefixIcon: Icon(Icons.person),
                                 border: OutlineInputBorder(),
                               ),
                               autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -94,7 +94,7 @@ class _RegisterState extends State<Register> {
                                 if(value.isEmpty){
                                   return "Please enter your email!";
                                 }else{
-                                  if(EmailValidator.validate(value)){
+                                  if(!EmailValidator.validate(value)){
                                     return "Email not valid!";
                                   }else{
                                     return null;
@@ -139,7 +139,6 @@ class _RegisterState extends State<Register> {
                                     isLoading = true;
                                   });
                                   Users users=new Users("",ctrlName.text,ctrlPhone.text,ctrlEmail.text,ctrlPassword.text,"","");
-                                  AuthServices.SignUp(users);
                                   await AuthServices.SignUp(users).then((value){
                                     if (value=="success"){
                                       setState(() {
@@ -183,9 +182,8 @@ class _RegisterState extends State<Register> {
                           ],
                         ))
                   ],
-                )
-            )
-            ,
+                ),
+            ),
             isLoading == true
                 ? ActivityServices.loadings()
                 : Container()
